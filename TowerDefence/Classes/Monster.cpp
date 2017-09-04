@@ -8,7 +8,6 @@ int speedTable[8] =        { 50,   100, 80,    45,     90,    120, 100,    70 };
 int ZOTabel[8] = { 1,    2,   1,   1,   2,   3,   3,   4 };
 
 #define BURN_EFFECT (25)	//子弹燃烧伤害
-#define SLOW_EFFECT (30)	//子弹减缓速度
 
 Monster* Monster::create(int id,int way)
 {
@@ -25,10 +24,6 @@ Monster* Monster::create(int id,int way)
 	if (monster&&monster->initWithSpriteFrame(frames.front()))
 	{
 		monster->id = id;
-
-		//放大野猪
-		if (monster->id == 8)
-			monster->setScale(1.3f);
 
 		monster->maxblood = monster->blood =bloodTable[id - 1];
 		monster->speed = speedTable[id - 1];
@@ -125,12 +120,10 @@ void Monster::move(Point nextPoint)
 		this->runAction(seq);
 }
 
-///////////////////////////////////////////////////
-///////////////////////////////////////////////////
 void Monster::cutBlood()
 {
 	//持续攻击不能使怪物致死
-	if (blood - BURN_EFFECT > 10)
+	if (blood - BURN_EFFECT >30)
 	{
 		blood -= BURN_EFFECT;
 		timer->setPercentage(blood / maxblood * 100);

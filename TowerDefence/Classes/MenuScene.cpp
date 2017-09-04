@@ -47,8 +47,8 @@ bool MenuScene::init() {
 	auto achieveItem = MenuItemImage::create("MenuScene/bt_achieve_1.png", "MenuScene/bt_achieve_2.png", CC_CALLBACK_1(MenuScene::menuAchieveCallback, this));
 	auto monsterItem = MenuItemImage::create("MenuScene/bt_monster_1.png", "MenuScene/bt_monster_2.png", CC_CALLBACK_1(MenuScene::menuMonsterCallback, this));
 	auto towerItem = MenuItemImage::create("MenuScene/bt_tower_1.png", "MenuScene/bt_tower_2.png", CC_CALLBACK_1(MenuScene::menuTowerCallback, this));
-	auto backItem = MenuItemImage::create("MenuScene/bt_back_1.png", "MenuScene/bt_back_2.png", CC_CALLBACK_1(MenuScene::menuBackCallback, this));
-	auto bgMusicItem = MenuItemImage::create("MenuScene/bt_bgMusic.png", "MenuScene/bt_bgMusic.png", CC_CALLBACK_1(MenuScene::menuMusicCallback, this));
+	backItem = MenuItemImage::create("MenuScene/bt_back_1.png", "MenuScene/bt_back_2.png", CC_CALLBACK_1(MenuScene::menuBackCallback, this));
+	bgMusicItem = MenuItemImage::create("MenuScene/bt_bgMusic.png", "MenuScene/bt_bgMusic.png", CC_CALLBACK_1(MenuScene::menuMusicCallback, this));
 	leftItem = MenuItemImage::create("MenuScene/bt_left_1.png", "MenuScene/bt_left_2.png", CC_CALLBACK_1(MenuScene::menuLeftCallback, this));
 	rightItem = MenuItemImage::create("MenuScene/bt_right_1.png", "MenuScene/bt_right_2.png", CC_CALLBACK_1(MenuScene::menuRightCallback, this));
 
@@ -134,6 +134,13 @@ void MenuScene::menuBackCallback(Ref* pSender) {
 
 void MenuScene::menuAchieveCallback(Ref* pSender) {
 	SimpleAudioEngine::getInstance()->playEffect("Music/click_click.wav");
+
+	//Òþ²Ø°´Å¥
+	leftItem->runAction(FadeOut::create(0.5f));
+	rightItem->runAction(FadeOut::create(0.5f));
+	backItem->runAction(FadeOut::create(0.5f));
+	bgMusicItem->runAction(FadeOut::create(0.5f));
+	musicRight->runAction(FadeOut::create(0.5f));
 
 	MySceneManager::myGetInstance()->toAchieveMenu(this);
 }

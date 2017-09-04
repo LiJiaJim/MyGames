@@ -52,9 +52,10 @@ bool GameScene::init()
 		return false;
 	}
 
+	level = UserDefault::getInstance()->getIntegerForKey("nowLevel");
 	
 	//预加载背景音乐
-	switch (UserDefault::getInstance()->getIntegerForKey("nowLevel"))
+	switch (level)
 	{
 	case 1:
 		SimpleAudioEngine::getInstance()->preloadBackgroundMusic("Music/bg_Game_normal.wav");
@@ -103,10 +104,6 @@ bool GameScene::init()
 
 	money = 0;
 	wave = 0;
-
-	///////////////////////////////////////////
-	level = UserDefault::getInstance()->getIntegerForKey("nowLevel");
-
 
 	visibleSize = Director::getInstance()->getVisibleSize();
 	visibleOrigin = Director::getInstance()->getVisibleOrigin();
@@ -165,11 +162,22 @@ bool GameScene::init()
 		nowWave = 1;
 		getWaveInfo();
 		waveLabel = LabelTTF::create();
-		waveLabel->setString(String::createWithFormat("Wave : %d / %d",nowWave,wave)->getCString());
-		waveLabel->setPosition(Point(500, 758));
-		waveLabel->setFontSize(30);
+		waveLabel->setString(String::createWithFormat("wave %d/%d",nowWave,wave)->getCString());
+		waveLabel->setPosition(Point(450, 758));
+		waveLabel->setFontSize(23);
 		this->addChild(waveLabel, NUM_ZO);
 	}
+
+
+	//当前关卡提示
+	{
+		levelLabel = LabelTTF::create();
+		levelLabel->setString(String::createWithFormat("Level %d", level)->getCString());
+		levelLabel->setPosition(Point(600, 758));
+		levelLabel->setFontSize(23);
+		this->addChild(levelLabel, NUM_ZO);
+	}
+
 
 	//生命力
 	{
@@ -229,8 +237,8 @@ bool GameScene::init()
 	auto failItem = MenuItemImage::create("GameScene/bt_fail.png", "GameScene/bt_fail.png", CC_CALLBACK_1(GameScene::menuFailCallback, this));
 	failItem->setPosition(Vec2(50, 320));
 
-	winItem->setVisible(false);		winItem->setEnabled(false);
-	failItem->setVisible(false);		failItem->setEnabled(false);
+	//winItem->setVisible(false);		winItem->setEnabled(false);
+	//failItem->setVisible(false);		failItem->setEnabled(false);
 
 	auto menu = Menu::create(speedItem, pauseItem, musicItem, winItem, failItem, NULL);
 	menu->setPosition(Point::ZERO);
@@ -967,7 +975,7 @@ void GameScene::Myupdate(float dt)
 		{
 			canCreateMonster = true;
 			nowWave++;
-			waveLabel->setString(String::createWithFormat("Wave : %d / %d", nowWave, wave)->getCString());
+			waveLabel->setString(String::createWithFormat("wave %d/%d", nowWave, wave)->getCString());
 		}
 
 

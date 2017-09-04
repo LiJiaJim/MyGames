@@ -1,4 +1,5 @@
 #include"AchieveMenu.h"
+#include"MenuScene.h"
 
 bool AchieveMenu::init() {
 	if (!Layer::init())
@@ -103,10 +104,21 @@ bool AchieveMenu::init() {
 
 void AchieveMenu::menuCloseCallback(Ref* pSender) 
 {
+	MenuItem* left = static_cast<MenuScene*>(this->getParent())->leftItem;
+	MenuItem* right = static_cast<MenuScene*>(this->getParent())->rightItem;
+	MenuItem* back = static_cast<MenuScene*>(this->getParent())->backItem;
+	MenuItem* music = static_cast<MenuScene*>(this->getParent())->bgMusicItem;
+	Sprite* mRight = static_cast<MenuScene*>(this->getParent())->musicRight;
+
+	left->runAction(FadeIn::create(0.5f));
+	right->runAction(FadeIn::create(0.5f));
+	back->runAction(FadeIn::create(0.5f));
+	music->runAction(FadeOut::create(0.5f));
+	mRight->runAction(FadeOut::create(0.5f));
+
 
 	this->removeAllChildrenWithCleanup(true);
 	this->removeFromParent();
-
 }
 
 void AchieveMenu::menuType1Callback(Ref* pSender) {

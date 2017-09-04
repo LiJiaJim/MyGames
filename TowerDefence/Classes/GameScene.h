@@ -31,6 +31,7 @@ public:
 	cocos2d::LabelTTF* moneyLabel;
 	cocos2d::LabelTTF* heartLabel;
 	cocos2d::LabelTTF* waveLabel;
+	cocos2d::LabelTTF* levelLabel;					
 	cocos2d::Sprite* bar;											//游戏上方菜单栏
 
 	std::list<Monster*> monsterList;						//怪物容器

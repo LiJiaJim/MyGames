@@ -10,7 +10,14 @@ public:
 	CREATE_FUNC(MenuScene);
 	virtual bool init();
 
+	MenuItemImage* leftItem;		//换关左右按钮
+	MenuItemImage* rightItem;
+	MenuItemImage* backItem;
+	MenuItemImage* bgMusicItem;
+	Sprite* musicRight;					//音乐按钮右边部分
+
 private:
+
 	void menuStartCallback(Ref* pSender);
 	void menuAchieveCallback(Ref* pSender);
 	void menuBackCallback(Ref* pSender);
@@ -23,11 +30,8 @@ private:
 	void setMapMove(bool isNextLevel);		//用于移动地图执行动作
 	void removeMap();
 
-	Sprite* musicRight;		//音乐按钮右边部分
 	Sprite* levelNum;	//顶部level右侧数字
 
-	MenuItemImage* leftItem;		//换关左右按钮
-	MenuItemImage* rightItem;
 	MenuItemImage* startItem;	//未解锁时Unable
 	MenuItemImage* _startItem;
 
