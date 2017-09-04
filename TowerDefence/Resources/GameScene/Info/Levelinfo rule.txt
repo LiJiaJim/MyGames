@@ -1,0 +1,5 @@
+x //waves
+xxx //initial money
+xxxxx  //monsters' ID in each wave 
+xxxxx
+xxxxx

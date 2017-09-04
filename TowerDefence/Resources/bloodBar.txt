@@ -1,0 +1,20 @@
+	auto monster = Sprite::create("Data/Map/res/monster.png");
+	monster->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+	monster->setScale(1.5);
+	this->addChild(monster, 1);
+
+	Sprite *bgSprite = Sprite::create("GameScene/blood_empty.png"); //这是空血条或背景框
+	bgSprite->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+	addChild(bgSprite, 2);
+
+	Sprite *hpSprite = Sprite::create("GameScene/blood_full.png");//这是满血条或填充
+	pBloodProgress = ProgressTimer::create(hpSprite);
+	pBloodProgress->setType(ProgressTimer::Type::BAR);
+	pBloodProgress->setMidpoint(ccp(0, 0.5));
+	pBloodProgress->setBarChangeRate(ccp(1, 0));
+
+	pBloodProgress->setMidpoint(Point(0, 0.5));
+	pBloodProgress->setBarChangeRate(Point(1, 0));
+	pBloodProgress->setPercentage(30);  //create a function to change the percentage
+	pBloodProgress->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+	addChild(pBloodProgress, 2);
